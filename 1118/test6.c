@@ -2,11 +2,11 @@
 #include<string.h>
 
 void in_id(char id[19]){
-    for(int i = 16; i>=5; i--){
+    for(int i = 14; i>=6; i--){
         id[i+2] = id[i];
     }
-    id[5] = '1';
-    id[6] = '9';
+    id[6] = '1';
+    id[7] = '9';
 }
 
 char last_id(char id[19]){
@@ -14,7 +14,7 @@ char last_id(char id[19]){
     int coef[] = {7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
     char last_code[] = {"10X98765432"};
     
-    for(int i = 0; id[i] != '\0'; i++){
+    for(int i = 0; i < 17; i++){
         // printf("%c %d\n", id[i], coef[i]);
         sum += (id[i]-'0') * coef[i];
     }
