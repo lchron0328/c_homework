@@ -1,11 +1,12 @@
 #include<stdio.h>
 #include<string.h>
 
-int cal_len(char str[], int total_len){
+int MaxLenWord(char str[]){
     int word_len = 0;
     int max_word_len = 0;
-    for(int i = 0; i < total_len; i++){
-        if(i != '\0' || i != ' '){
+    int i = 0;
+    while(1){
+        if(str[i] != '\0' && str[i] != ' '){
             word_len++;
         }
         else{
@@ -13,20 +14,53 @@ int cal_len(char str[], int total_len){
                 max_word_len = word_len;
             }
             word_len = 0;
+            if(str[i] == '\0')break;
         }
+        i++;
     }
-    return max_word_len;
+    
+    i = 0;
+    word_len = 0;
+
+    int wordStart = 0;
+    int firstPrint = 1;
+
+    while (1) {
+        if (str[i] != ' ' && str[i] != '\0') {
+            word_len++;
+        } else {
+            if (word_len == max_word_len) {
+                if (!firstPrint) {
+                    printf(" ");
+                }
+                
+                for (int k = 0; k < word_len; k++) {
+                    printf("%c", str[wordStart + k]);
+                }
+                
+                firstPrint = 0;
+            }
+            
+            word_len = 0;
+            wordStart = i + 1;
+
+            if (str[i] == '\0') break;
+        }
+        i++;
+    }
+    printf("\n");
 }
 
 
 int main() {
-    char str[100];
-    printf("Enter a sentence: ");
-    // Reads all characters until a newline (\n) is encountered,
-    // and discards the newline character itself.
-    scanf("%[^\n]%*c", str);
-    int len = strlen(str);
-    printf("%d\n", cal_len(str, len));
-    printf("You entered: %s\n", str);
+    int t;
+    scanf("%d", &t);
+    getchar();
+    while(t--){
+        char str[100];
+        scanf("%[^\n]%*c", str);
+        MaxLenWord(str);
+    }
+    
     return 0;
 }
